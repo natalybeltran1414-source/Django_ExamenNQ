@@ -22,23 +22,7 @@ def registry(request):
         form = PeliculasForm()
     return render(request, "registry.html", {"form": form})
 
-def registry_create(request):
-    if request.method == "GET":
-        return render(request,
-                      "registry_create.html",
-                      {"form":PeliculasForm()})
-    else:
-        try:
-            form = PeliculasForm(request.POST)
-            new_registry = form.save(commit=False)
-            new_registry.user = request.user
-            new_registry.save()
-            return redirect("registry")
-        except ValueError:
-            return render(request,
-                          "registry_create.html",
-                          {"form":PeliculasForm(),
-                           "error":"Error al crear el registro. Por favor, intente de nuevo."})
+
 
 def signin(request):
     if request.method == "GET":
